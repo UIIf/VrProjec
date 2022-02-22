@@ -7,21 +7,35 @@ using Valve.VR.InteractionSystem;
 
 public class SpinerScript : MonoBehaviour
 {
-    [SerializeField] Transform CircleWraper;
-    [SerializeField] Transform HandleWraper;
-    [SerializeField] Transform HolderWraper;
-    Interactable HolderInteract;
+    [SerializeField] Transform handle;
+    [SerializeField] Transform handleEmulator;
+    [SerializeField] Transform[] coRotation;
+    Interactable handleInteract;
+
+    [Range(0, 360)]
+    [SerializeField] float angleOfset = 0;
 
     [Header("Spiner Events")]
-    [SerializeField] UnityEvent[] Events;//= new UnityEvent[3];
+    [SerializeField] UnityEvent[] Events;
     [SerializeField] UnityEvent OnChangeEvent;
 
     [SerializeField] int CurrentIndex = -1;
     [SerializeField] float handleDist = 0.2f;
 
+    [Header("Gizmos efect")]
+    [SerializeField] float gizmoRadius = 0.25f;
+    [SerializeField] Color gizmoColor = Color.yellow;
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = gizmoColor;
+        Vector3 temp = Vector3.ProjectOnPlane(new Vector3(Mathf.Cos((angleOfset + 90) * Mathf.Deg2Rad), Mathf.Sin((angleOfset + 90) * Mathf.Deg2Rad), 0).normalized * gizmoRadius, transform.forward);
+        Gizmos.DrawLine(transform.position, temp + transform.position);
+    }
+
     private void Awake()
     {
-        HolderInteract = HolderWraper.gameObject.GetComponent<Interactable>();
+        handleInteract = handle.gameObject.GetComponent<Interactable>();
     }
 
     private void Update()
@@ -33,24 +47,25 @@ public class SpinerScript : MonoBehaviour
     private float newAngle;
     void ChangeAAngle()
     {
-        newAngle = (HolderWraper.eulerAngles - transform.localEulerAngles).z;
-        //Debug.Log(newAngle);
-
-        CircleWraper.localEulerAngles = Vector3.forward * newAngle;
-        HandleWraper.localEulerAngles = Vector3.forward * newAngle;
+        newAngle = (handle.eulerAngles - transform.localEulerAngles).z;
+        handleEmulator.localEulerAngles = Vector3.forward * newAngle;
+        for (int i = 0; i < coRotation.Length; i++)
+        {
+            coRotation[i].localEulerAngles = Vector3.forward * newAngle;
+        }
     }
 
     public void ReturnHandele()
     {
-        HolderWraper.position = HandleWraper.position;
-        HolderWraper.rotation = HandleWraper.rotation;
+        handle.position = handleEmulator.position;
+        handle.rotation = handleEmulator.rotation;
     }
 
 
 
     public void ChekDist(Hand hand)
     {
-        if (Vector3.Distance(HolderWraper.position, HandleWraper.position) > handleDist)
+        if (Vector3.Distance(handle.position, handleEmulator.position) > handleDist)
         {
             DropSmth(hand);
         }
@@ -58,15 +73,15 @@ public class SpinerScript : MonoBehaviour
 
     void DropSmth(Hand hand)
     {
-        Debug.Log(HolderInteract);
-        if (!HolderInteract || !HolderInteract.attachedToHand)
+        Debug.Log(handleInteract);
+        if (!handleInteract || !handleInteract.attachedToHand)
         {
             ReturnHandele();
             return;
         }
 
-        hand.DetachObject(HolderWraper.gameObject);
-        hand.HoverUnlock(HolderInteract);
+        hand.DetachObject(handle.gameObject);
+        hand.HoverUnlock(handleInteract);
         ReturnHandele();
     }
 
@@ -75,7 +90,7 @@ public class SpinerScript : MonoBehaviour
         //OnChangeEvent.Invoke();
         float SectorSize = 360 / Events.Length;
         
-        float Angle = (360 - newAngle) + SectorSize/2;
+        float Angle = (360 - newAngle) + SectorSize/2 + angleOfset;
         if(Angle > 360)
         {
             Angle -= 360;

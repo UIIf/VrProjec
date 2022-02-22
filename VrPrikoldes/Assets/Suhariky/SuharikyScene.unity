@@ -1999,19 +1999,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1442763834583739822, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.391
+      value: 1.3932678
       objectReference: {fileID: 0}
     - target: {fileID: 1442763834583739822, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5817
+      value: 1.5515444
       objectReference: {fileID: 0}
     - target: {fileID: 1442763834583739822, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.0000029504295
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1442763834583739822, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1442763834583739822, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2019,7 +2019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1442763834583739822, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1442763834583739822, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2032,6 +2032,14 @@ PrefabInstance:
     - target: {fileID: 1442763834583739822, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172906921315455782, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
+      propertyPath: angleOfset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172906921315455782, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
+      propertyPath: gizmoRadius
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6172906921315455782, guid: a2583c4b4efba0d4085bac528e69ad44, type: 3}
       propertyPath: Events.Array.size

@@ -932,9 +932,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f32cce4d02088c54da06e07b65b6307b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CircleWraper: {fileID: 6742181998193580703}
-  HandleWraper: {fileID: 5330892662476973923}
-  HolderWraper: {fileID: 6880626090958285244}
+  handle: {fileID: 6880626090958285244}
+  handleEmulator: {fileID: 5330892662476973923}
+  coRotation:
+  - {fileID: 6742181998193580703}
   Events: []
   OnChangeEvent:
     m_PersistentCalls:
